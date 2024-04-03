@@ -70,8 +70,10 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function powerFunction(base) {
+    return base ** exponent;
+  };
 }
 
 /**
@@ -105,8 +107,20 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const cache = {};
+  return (...args) => {
+    const key = JSON.stringify(args);
+
+    if (cache[key]) {
+      return cache[key];
+    }
+
+    const result = func.apply(this, args);
+    cache[key] = result;
+
+    return result;
+  };
 }
 
 /**
